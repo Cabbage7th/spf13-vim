@@ -1,0 +1,96 @@
+
+" Environment {
+
+    " Basics {
+        set nocompatible        " Must be first line
+        set background=dark     " Assume a dark background
+    " }
+
+call plug#begin('~/.vim/plugged')
+
+" Plugs {
+    " In your .vimrc.before.local file
+    " list only the plugin groups you will use
+    if !exists('g:spf13_plug_groups')
+        let g:spf13_plug_groups=['general', 'ctags', 'youcompleteme', 'programming', 'python', 'misc',]
+    endif
+
+    " To override all the included plugs, add the following to your
+    " .vimrc.plugs.local file:
+    "   let g:override_spf13_plugs = 1
+    if !exists("g:override_spf13_plugs")
+
+    " General {
+        Plug 'scrooloose/nerdtree'
+        Plug 'jistr/vim-nerdtree-tabs'
+        Plug 'justinmk/vim-dirvish'
+        Plug 'altercation/vim-colors-solarized'
+        Plug 'aonemd/kuroi.vim'
+        Plug 'morhetz/gruvbox'
+        Plug 'tpope/vim-surround'
+        Plug 'tpope/vim-repeat'
+        Plug 'myusuf3/numbers.vim'
+        Plug 'rhysd/conflict-marker.vim'
+        Plug 'jiangmiao/auto-pairs'
+        Plug 'tpope/vim-unimpaired'
+        Plug 'yggdroot/leaderf'
+        Plug 'terryma/vim-multiple-cursors'
+        Plug 'vim-airline/vim-airline'
+        Plug 'vim-airline/vim-airline-themes'
+        Plug 'bling/vim-bufferline'
+        Plug 'easymotion/vim-easymotion'
+        Plug 'mbbill/undotree'
+        Plug 'nathanaelkane/vim-indent-guides'
+        Plug 'mhinz/vim-signify'
+        Plug 'kana/vim-textobj-user'
+        Plug 'kana/vim-textobj-indent'
+        Plug 'gcmt/wildfire.vim'
+    " }
+
+    " General Programming {
+        " Pick one of the checksyntax, jslint, or syntastic
+        Plug 'kana/vim-textobj-function'
+        Plug 'mattn/gist-vim'
+        Plug 'scrooloose/nerdcommenter'
+        Plug 'tpope/vim-commentary'
+        Plug 'godlygeek/tabular'
+        Plug 'luochen1990/rainbow'
+        Plug 'vim-scripts/DoxygenToolkit.vim'
+        Plug 'w0rp/ale'
+    " }
+    
+    " ctags & gtags {
+        if count(g:spf13_plug_groups, 'ctags')
+            Plug 'vim-scripts/autoload_cscope.vim'
+        elseif count(g:spf13_plug_groups, 'gtags')
+            Plug 'ludovicchabant/vim-gutentags'
+            Plug 'skywind3000/gutentags_plus'
+            Plug 'skywind3000/vim-preview'
+        endif
+    "}
+
+    " Snippets & AutoComplete {
+        if count(g:spf13_plug_groups, 'youcompleteme')
+            Plug 'Valloric/YouCompleteMe'
+            Plug 'shougo/echodoc'
+            Plug 'SirVer/ultisnips'
+            Plug 'honza/vim-snippets'
+        endif
+    " }
+
+    " Misc {
+        Plug 'rust-lang/rust.vim'
+        Plug 'tpope/vim-markdown'
+        Plug 'tpope/vim-cucumber'
+        Plug 'cespare/vim-toml'
+        Plug 'quentindecock/vim-cucumber-align-pipes'
+        Plug 'saltstack/salt-vim'
+    " }
+    " others {
+        Plug 'vim/killersheep'
+    " }
+
+    endif
+" }
+
+call plug#end()

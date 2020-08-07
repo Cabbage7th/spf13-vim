@@ -1,0 +1,9 @@
+""""""""""""""""""""""""""""""""""""""""
+"       user vimrc.local
+"       customized settings
+
+" Key (re) Mappings {
+"
+    inoremap    jk      <esc>
+"
+" }
