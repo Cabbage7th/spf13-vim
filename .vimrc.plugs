@@ -80,7 +80,6 @@ call plug#begin('~/.vim/plugged')
 
     " Misc {
         Plug 'rust-lang/rust.vim'
-        Plug 'tpope/vim-markdown'
         Plug 'tpope/vim-cucumber'
         Plug 'cespare/vim-toml'
         Plug 'quentindecock/vim-cucumber-align-pipes'

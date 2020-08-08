@@ -17,11 +17,11 @@
 ############################  SETUP PARAMETERS
 app_name='spf13-vim'
 [ -z "$APP_PATH" ] && APP_PATH="$HOME/.spf13-vim-3"
-[ -z "$REPO_URI" ] && REPO_URI='https://github.com/spf13/spf13-vim.git'
+[ -z "$REPO_URI" ] && REPO_URI='https://github.com/Cabbage7th/spf13-vim.git'
 [ -z "$REPO_BRANCH" ] && REPO_BRANCH='3.0'
 debug_mode='0'
 fork_maintainer='0'
-[ -z "$VUNDLE_URI" ] && VUNDLE_URI="https://github.com/gmarik/vundle.git"
+[ -z "$VIMPLUG_URI" ] && VIMPLUG_URI="https://github.com/junegunn/vim-plug.git"
 
 ############################  BASIC SETUP TOOLS
 msg() {
@@ -83,10 +83,10 @@ lnif() {
 ############################ SETUP FUNCTIONS
 
 do_backup() {
-    if [ -e "$1" ] || [ -e "$2" ] || [ -e "$3" ]; then
+    if [ -e "$1" ] || [ -e "$2" ]; then
         msg "Attempting to back up your original vim configuration."
         today=`date +%Y%m%d_%s`
-        for i in "$1" "$2" "$3"; do
+        for i in "$1" "$2"; do
             [ -e "$i" ] && [ ! -L "$i" ] && mv -v "$i" "$i.$today";
         done
         ret="$?"
@@ -122,16 +122,9 @@ create_symlinks() {
     local target_path="$2"
 
     lnif "$source_path/.vimrc"         "$target_path/.vimrc"
-    lnif "$source_path/.vimrc.bundles" "$target_path/.vimrc.bundles"
-    lnif "$source_path/.vimrc.before"  "$target_path/.vimrc.before"
+    lnif "$source_path/.vimrc.plugs" "$target_path/.vimrc.plugs"
+    lnif "$source_path/.vimrc.local"  "$target_path/.vimrc.local"
     lnif "$source_path/.vim"           "$target_path/.vim"
-
-    if program_exists "nvim"; then
-        lnif "$source_path/.vim"       "$target_path/.config/nvim"
-        lnif "$source_path/.vimrc"     "$target_path/.config/nvim/init.vim"
-    fi
-
-    touch  "$target_path/.vimrc.local"
 
     ret="$?"
     success "Setting up vim symlinks."
@@ -157,20 +150,20 @@ setup_fork_mode() {
     fi
 }
 
-setup_vundle() {
+setup_vimplug() {
     local system_shell="$SHELL"
     export SHELL='/bin/sh'
 
     vim \
         -u "$1" \
         "+set nomore" \
-        "+BundleInstall!" \
-        "+BundleClean" \
+        "+PlugInstall" \
+        "+PlugClean" \
         "+qall"
 
     export SHELL="$system_shell"
 
-    success "Now updating/installing plugins using Vundle"
+    success "Now updating/installing plugins using vim-plug"
     debug
 }
 
@@ -181,7 +174,6 @@ program_must_exist "git"
 
 do_backup       "$HOME/.vim" \
                 "$HOME/.vimrc" \
-                "$HOME/.gvimrc"
 
 sync_repo       "$APP_PATH" \
                 "$REPO_URI" \
@@ -191,16 +183,16 @@ sync_repo       "$APP_PATH" \
 create_symlinks "$APP_PATH" \
                 "$HOME"
 
-setup_fork_mode "$fork_maintainer" \
-                "$APP_PATH" \
-                "$HOME"
+#setup_fork_mode "$fork_maintainer" \
+                #"$APP_PATH" \
+                #"$HOME"
 
-sync_repo       "$HOME/.vim/bundle/vundle" \
-                "$VUNDLE_URI" \
+sync_repo       "$HOME/.vim/autoload" \
+                "$VIMPLUG_URI" \
                 "master" \
-                "vundle"
+                "vim-plug"
 
-setup_vundle    "$APP_PATH/.vimrc.bundles.default"
+setup_vimplug "$HOME/.vimrc"
 
 msg             "\nThanks for installing $app_name."
-msg             "© `date +%Y` http://vim.spf13.com/"
+msg             "© `date +%Y` https://github.com/Cabbage7th/spf13-vim/"

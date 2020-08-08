@@ -12,7 +12,8 @@ die() {
 }
 
 rm $HOME/.vimrc
-rm $HOME/.vimrc.bundles
+rm $HOME/.vimrc.plugs
+rm $HOME/.vimrc.local
 rm $HOME/.vim
 
 rm -rf $app_dir
