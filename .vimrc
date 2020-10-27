@@ -32,8 +32,8 @@
 
 " Environment {
     " kuroi, gruvbox, solarized, default
-    let g:colorscheme="solarized"
-    let g:background="light"
+    let g:colorscheme="sonokai"
+    let g:background="dark"
     " ctags, gtags
     let g:tag_cscope="ctags"
 " }
@@ -176,6 +176,19 @@
         else
             call SetDefaultColorscheme()
         endif
+    elseif g:colorscheme ==? "sonokai"
+        " Important!!
+        "if has('termguicolors')
+            "set termguicolors
+        "endif
+
+        " The configuration options should be placed before `colorscheme sonokai`.
+        " style: atlantis, andromeda, shusia, maia
+        let g:sonokai_style = 'andromeda'
+        let g:sonokai_enable_italic = 0
+        let g:sonokai_disable_italic_comment = 1
+
+        colorscheme sonokai
     else
         call SetDefaultColorscheme()
     endif
@@ -689,7 +702,7 @@
             let g:ycm_add_preview_to_completeopt = 0
             let g:ycm_show_diagnostics_ui = 0
             let g:ycm_server_log_level = 'info'
-            let g:ycm_min_num_identifier_candidate_chars = 2
+"            let g:ycm_min_num_identifier_candidate_chars = 2
             let g:ycm_collect_identifiers_from_comments_and_strings = 1
             let g:ycm_complete_in_strings=1
             let g:ycm_key_invoke_completion = '<c-z>'
@@ -699,10 +712,10 @@
 
 "            noremap <c-z> <NOP>
 
-            let g:ycm_semantic_triggers =  {
-                \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-                \ 'cs,lua,javascript': ['re!\w{2}'],
-                \ }
+            "let g:ycm_semantic_triggers =  {
+                "\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+                "\ 'cs,lua,javascript': ['re!\w{2}'],
+                "\ }
         endif
     " }
     " echodoc {

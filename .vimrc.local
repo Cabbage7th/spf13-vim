@@ -5,5 +5,9 @@
 " Key (re) Mappings {
 "
     inoremap    jk      <esc>
+    nnoremap    ss      :w<CR>
+    nnoremap    sa      :wa<CR>
+    nnoremap    gb      <C-^>
+    nnoremap    sp      :pwd<CR>
 "
 " }

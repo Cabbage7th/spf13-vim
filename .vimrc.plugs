@@ -24,9 +24,6 @@ call plug#begin('~/.vim/plugged')
         Plug 'scrooloose/nerdtree'
         Plug 'jistr/vim-nerdtree-tabs'
         Plug 'justinmk/vim-dirvish'
-        Plug 'altercation/vim-colors-solarized'
-        Plug 'aonemd/kuroi.vim'
-        Plug 'morhetz/gruvbox'
         Plug 'tpope/vim-surround'
         Plug 'tpope/vim-repeat'
         Plug 'myusuf3/numbers.vim'
@@ -75,6 +72,7 @@ call plug#begin('~/.vim/plugged')
             Plug 'shougo/echodoc'
             Plug 'SirVer/ultisnips'
             Plug 'honza/vim-snippets'
+            Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
         endif
     " }
 
@@ -84,6 +82,14 @@ call plug#begin('~/.vim/plugged')
         Plug 'cespare/vim-toml'
         Plug 'quentindecock/vim-cucumber-align-pipes'
         Plug 'saltstack/salt-vim'
+        Plug 'sheerun/vim-polyglot'
+    " }
+    " colors & themes {
+        Plug 'altercation/vim-colors-solarized'
+        Plug 'aonemd/kuroi.vim'
+        Plug 'morhetz/gruvbox'
+        Plug 'franbach/miramare'
+        Plug 'sainnhe/sonokai'
     " }
     " others {
         Plug 'vim/killersheep'
