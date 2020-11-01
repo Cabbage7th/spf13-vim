@@ -2,6 +2,8 @@
 "       user vimrc.local
 "       customized settings
 
+" global parameters
+
 " Key (re) Mappings {
 "
     inoremap    jk      <esc>

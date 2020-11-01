@@ -1,0 +1,45 @@
+{
+    "languageserver": {
+        "cmake": {
+            "command": "cmake-language-server",
+            "filetypes": ["cmake", "make"],
+            "rootPatterns": [
+                "build/",
+                "compile_commands"
+            ],
+            "initializationOptions": {
+                "buildDirectory": "build"
+            }
+        },
+//        "clangd": {
+//            "command": "clangd",
+//            "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
+//            "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
+//        },
+        "efm": {
+            "command": "efm-langserver",
+            "args": [],
+            // custom config path
+            // "args": ["-c", "/path/to/your/config.yaml"],
+            "filetypes": ["vim", "eruby", "markdown"]
+        }
+    },
+    // coc-explorer
+    "explorer.icon.enableNerdfont": true,
+    "explorer.file.showHiddenFiles": false,
+    "explorer.file.hiddenRules": {
+        "extensions": [
+            "o",
+            "a",
+            "obj",
+            "pyc"
+        ],
+        "filenames": [],
+        "patternMatches": [
+            "^\\."
+        ]
+    },
+    "snippets.userSnippetsDirectory": "~/.config/coc/ultisnips/",
+    "suggest.minTriggerInputLength": 2,
+    "suggest.enablePreview": true
+}

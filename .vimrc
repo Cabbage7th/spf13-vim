@@ -31,11 +31,18 @@
 " }
 
 " Environment {
-    " kuroi, gruvbox, solarized, default
-    let g:colorscheme="sonokai"
-    let g:background="dark"
+    " kuroi, gruvbox, solarized, sonokai, dracula, default
+    let g:colorscheme="solarized"
+    let g:background="light"
     " ctags, gtags
     let g:tag_cscope="ctags"
+
+    " python version
+    if has('python3')
+        set pyx=3
+    elseif has('python')
+        set pyx=2
+    endif
 " }
 
 " Use plugs config {
@@ -83,7 +90,7 @@
     " Most prefer to automatically switch to the current file directory when
     " a new buffer is opened; to prevent this behavior, add the following to
     " your .vimrc.before.local file:
-    "   let g:spf13_no_autochdir = 1
+    let g:spf13_no_autochdir = 1
     if !exists('g:spf13_no_autochdir')
         autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
         " Always switch to the current file directory
@@ -167,6 +174,12 @@
     if g:colorscheme ==? "kuroi"
         if filereadable(expand("~/.vim/plugged/kuroi.vim/colors/kuroi.vim"))
             color kuroi
+        else
+            call SetDefaultColorscheme()
+        endif
+    elseif g:colorscheme ==? "dracula"
+        if filereadable(expand("~/.vim/plugged/dracula/colors/dracula.vim"))
+            color dracula
         else
             call SetDefaultColorscheme()
         endif
@@ -312,10 +325,10 @@
     " .vimrc.before.local file:
     "   let g:spf13_no_easyWindows = 1
     if !exists('g:spf13_no_easyWindows')
-        map <C-J> <C-W>j<C-W>_
-        map <C-K> <C-W>k<C-W>_
-        map <C-L> <C-W>l<C-W>_
-        map <C-H> <C-W>h<C-W>_
+        map <C-J> <C-W>j
+        map <C-K> <C-W>k
+        map <C-L> <C-W>l
+        map <C-H> <C-W>h
     endif
 
     " Wrapped lines goes down/up to next row, rather than next line in file.
@@ -634,20 +647,6 @@
         let g:vim_json_syntax_conceal = 0
     " }
 
-    " PyMode {
-        " Disable if python support not present
-        if !has('python') && !has('python3')
-            let g:pymode = 0
-        endif
-
-        if isdirectory(expand("~/.vim/plugged/python-mode"))
-            let g:pymode_lint_checkers = ['pyflakes']
-            let g:pymode_trim_whitespaces = 0
-            let g:pymode_options = 0
-            let g:pymode_rope = 0
-        endif
-    " }
-
     " LeaderF {
         if isdirectory(expand("~/.vim/plugged/leaderf/"))
             let g:Lf_ShortcutB = '<leader>fb'
@@ -681,6 +680,126 @@
         endif
     "}
 
+    " vim-rooter {
+        if isdirectory(expand("~/.vim/plugged/vim-rooter/"))
+            let g:rooter_targets = '*'
+            let g:rooter_patterns = ['.git', '.svn', '.bashrc', '.tags', '.gitignore', 'compile_commands.json']
+            let g:rooter_change_directory_for_non_project_files = 'current'
+            let g:rooter_manual_only = 0
+        endif
+    " }
+    " coc-nvim {
+        if isdirectory(expand("~/.vim/plugged/coc.nvim/"))
+            set hidden
+            set nobackup
+            set nowritebackup
+            set cmdheight=2
+            set updatetime=300
+            set shortmess+=c
+            " coc-explorer key mappings
+            nnoremap <C-e> :CocCommand explorer<CR>
+
+            inoremap <silent><expr> <TAB>
+                  \ pumvisible() ? "\<C-n>" :"\<TAB>"
+            inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+            " Use `[g` and `]g` to navigate diagnostics
+            " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+            nmap <silent> [g <Plug>(coc-diagnostic-prev)
+            nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+            " GoTo code navigation.
+            nmap <silent> gd <Plug>(coc-definition)
+            nmap <silent> gy <Plug>(coc-type-definition)
+            nmap <silent> gi <Plug>(coc-implementation)
+            nmap <silent> gr <Plug>(coc-references)
+
+            " Highlight the symbol and its references when holding the cursor.
+            autocmd CursorHold * silent call CocActionAsync('highlight')
+
+            " Symbol renaming.
+            nmap <leader>rn <Plug>(coc-rename)
+
+            " Formatting selected code.
+            " xmap <leader>f  <Plug>(coc-format-selected)
+            " nmap <leader>f  <Plug>(coc-format-selected)
+
+            inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>" 
+            " Remap <C-f> and <C-b> for scroll float windows/popups.
+            " Note coc#float#scroll works on neovim >= 0.4.3 or vim >= 8.2.0750
+            nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+            nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+            inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+            inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+            " Use CTRL-S for selections ranges.
+            " Requires 'textDocument/selectionRange' support of language server.
+            nmap <silent> <C-s> <Plug>(coc-range-select)
+            xmap <silent> <C-s> <Plug>(coc-range-select)
+            " Add (Neo)Vim's native statusline support.
+            " NOTE: Please see `:h coc-status` for integrations with external plugins that
+            " provide custom statusline: lightline.vim, vim-airline.
+            set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+        endif
+    "}
+    
+    " vista {
+        if isdirectory(expand("~/.vim/plugged/vista.vim/"))
+            function! NearestMethodOrFunction() abort
+                  return get(b:, 'vista_nearest_method_or_function', '')
+            endfunction
+
+            set statusline+=%{NearestMethodOrFunction()}
+
+            " By default vista.vim never run if you don't call it
+            " explicitly.
+            "
+            " If you want to show the nearest function in your statusline automatically,
+            " you can add the following line to your vimrc
+            autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+            
+            " How each level is indented and what to prepend.
+            " This could make the display more compact or more spacious.
+            " e.g., more compact: ["▸ ", ""]
+            " Note: this option only works the LSP executives, doesn't work for `:Vista ctags`.
+            let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+            "
+            " Executive used when opening vista sidebar without specifying it.
+            " See all the avaliable executives via `:echo g:vista#executives`.
+            let g:vista_default_executive = 'coc'
+            
+            " Set the executive for some filetypes explicitly. Use the explicit executive
+            "" instead of the default one for these filetypes when using `:Vista` without
+            "" specifying the executive.
+            let g:vista_executive_for = {
+                \ 'cpp': 'coc',
+                \ 'php': 'vim_lsp',
+                \ }
+            
+            " Declare the command including the executable and options used to generate ctags output
+            " for some certain filetypes.The file path will be appened to your custom command.
+            " For example:
+            let g:vista_ctags_cmd = {
+                \ 'haskell': 'hasktags -x -o - -c',
+                \ }
+            
+            " To enable fzf's preview window set
+            " g:vista_fzf_preview.
+            " The elements of g:vista_fzf_preview will be passed as arguments to fzf#vim#with_preview()
+            " For example:
+            " let g:vista_fzf_preview = ['right:50%']
+            
+            " Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
+            let g:vista#renderer#enable_icon = 1
+            
+            " The default icons can't be suitable for all the filetypes, you can extend it as you wish.
+            let g:vista#renderer#icons = {
+                       \   "function": "\uf794",
+                       \   "variable": "\uf71b",
+                       \  }
+        endif
+    " }
+    
     " Rainbow {
         if isdirectory(expand("~/.vim/plugged/rainbow/"))
             let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
@@ -731,6 +850,10 @@
 "            let g:UltiSnipsExpandTrigger="<tab>"
 "            let g:UltiSnipsJumpForwardTrigger="<c-p>"
 "            let g:UltiSnipsJumpBackwardTrigger="<c-n>"
+            "g:UltiSnipsExpandTrigger               <tab>
+            "g:UltiSnipsListSnippets                <c-tab>
+            "g:UltiSnipsJumpForwardTrigger          <c-p>
+            "g:UltiSnipsJumpBackwardTrigger         <c-n>
         endif
         
     " }

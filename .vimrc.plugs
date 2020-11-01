@@ -12,7 +12,8 @@ call plug#begin('~/.vim/plugged')
     " In your .vimrc.before.local file
     " list only the plugin groups you will use
     if !exists('g:spf13_plug_groups')
-        let g:spf13_plug_groups=['general', 'ctags', 'youcompleteme', 'programming', 'python', 'misc',]
+"        let g:spf13_plug_groups=['general', 'ctags', 'youcompleteme', 'programming', 'python', 'misc',]
+        let g:spf13_plug_groups=['general', 'ctags', 'programming', 'python', 'misc', 'coc-nvim']
     endif
 
     " To override all the included plugs, add the following to your
@@ -21,8 +22,16 @@ call plug#begin('~/.vim/plugged')
     if !exists("g:override_spf13_plugs")
 
     " General {
-        Plug 'scrooloose/nerdtree'
-        Plug 'jistr/vim-nerdtree-tabs'
+"        Plug 'scrooloose/nerdtree'
+        " new nerdtree
+        " give  defx nice icons
+        "Plug 'kristijanhusak/defx-icons'
+        "Plug 'Shougo/defx.nvim'
+        " needed for defx
+        "Plug 'roxma/nvim-yarp'
+        "Plug 'roxma/vim-hug-neovim-rpc'
+
+        "Plug 'jistr/vim-nerdtree-tabs'
         Plug 'justinmk/vim-dirvish'
         Plug 'tpope/vim-surround'
         Plug 'tpope/vim-repeat'
@@ -42,6 +51,14 @@ call plug#begin('~/.vim/plugged')
         Plug 'kana/vim-textobj-user'
         Plug 'kana/vim-textobj-indent'
         Plug 'gcmt/wildfire.vim'
+        " tagbar likely plugin with LSP
+        Plug 'liuchengxu/vista.vim'
+        " auto switch to paste mode
+        Plug 'ConradIrwin/vim-bracketed-paste'
+        " a start page
+        Plug 'mhinz/vim-startify'
+        " auto switch root dictory
+        Plug 'airblade/vim-rooter'
     " }
 
     " General Programming {
@@ -53,9 +70,9 @@ call plug#begin('~/.vim/plugged')
         Plug 'godlygeek/tabular'
         Plug 'luochen1990/rainbow'
         Plug 'vim-scripts/DoxygenToolkit.vim'
-        Plug 'w0rp/ale'
+"        Plug 'w0rp/ale'
     " }
-    
+
     " ctags & gtags {
         if count(g:spf13_plug_groups, 'ctags')
             Plug 'vim-scripts/autoload_cscope.vim'
@@ -69,11 +86,27 @@ call plug#begin('~/.vim/plugged')
     " Snippets & AutoComplete {
         if count(g:spf13_plug_groups, 'youcompleteme')
             Plug 'Valloric/YouCompleteMe'
-            Plug 'shougo/echodoc'
             Plug 'SirVer/ultisnips'
-            Plug 'honza/vim-snippets'
-            Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
         endif
+        if count(g:spf13_plug_groups, 'coc-nvim')
+            Plug 'neoclide/coc.nvim', {'branch': 'release'}
+            let g:coc_global_extensions = [
+            \    'coc-json',
+            \    'coc-git',
+            \    'coc-highlight',
+            \    'coc-python',
+            \    'coc-sh',
+            \    'coc-snippets',
+            \    'coc-vimlsp',
+            \    'coc-yaml',
+            \    'coc-yank',
+            \    'coc-clangd',
+            \    'coc-lists',
+            \    'coc-explorer',
+            \]
+        endif
+        Plug 'honza/vim-snippets'
+        Plug 'shougo/echodoc'
     " }
 
     " Misc {
@@ -90,6 +123,8 @@ call plug#begin('~/.vim/plugged')
         Plug 'morhetz/gruvbox'
         Plug 'franbach/miramare'
         Plug 'sainnhe/sonokai'
+        Plug 'ap/vim-css-color'
+        Plug 'dracula/vim', { 'as': 'dracula' }
     " }
     " others {
         Plug 'vim/killersheep'

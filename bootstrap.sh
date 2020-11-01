@@ -16,9 +16,9 @@
 
 ############################  SETUP PARAMETERS
 app_name='spf13-vim'
-[ -z "$APP_PATH" ] && APP_PATH="$HOME/.spf13-vim-3"
+[ -z "$APP_PATH" ] && APP_PATH="$HOME/.spf13-vim-cbg"
 [ -z "$REPO_URI" ] && REPO_URI='https://github.com/Cabbage7th/spf13-vim.git'
-[ -z "$REPO_BRANCH" ] && REPO_BRANCH='3.0'
+[ -z "$REPO_BRANCH" ] && REPO_BRANCH='cbg'
 debug_mode='0'
 fork_maintainer='0'
 [ -z "$VIMPLUG_URI" ] && VIMPLUG_URI="https://github.com/junegunn/vim-plug.git"
@@ -124,7 +124,7 @@ create_symlinks() {
     lnif "$source_path/.vimrc"         "$target_path/.vimrc"
     lnif "$source_path/.vimrc.plugs" "$target_path/.vimrc.plugs"
     lnif "$source_path/.vimrc.local"  "$target_path/.vimrc.local"
-    lnif "$source_path/.vim"           "$target_path/.vim"
+    lnif "$source_path/coc-settings.json"           "$target_path/coc-settings.json"
 
     ret="$?"
     success "Setting up vim symlinks."
@@ -171,6 +171,9 @@ setup_vimplug() {
 variable_set "$HOME"
 program_must_exist "vim"
 program_must_exist "git"
+program_must_exist "node"
+program_must_exist "npm"
+program_must_exist "yarn"
 
 do_backup       "$HOME/.vim" \
                 "$HOME/.vimrc" \
@@ -180,9 +183,6 @@ sync_repo       "$APP_PATH" \
                 "$REPO_BRANCH" \
                 "$app_name"
 
-create_symlinks "$APP_PATH" \
-                "$HOME"
-
 #setup_fork_mode "$fork_maintainer" \
                 #"$APP_PATH" \
                 #"$HOME"
@@ -191,6 +191,9 @@ sync_repo       "$HOME/.vim/autoload" \
                 "$VIMPLUG_URI" \
                 "master" \
                 "vim-plug"
+
+create_symlinks "$APP_PATH" \
+                "$HOME"
 
 setup_vimplug "$HOME/.vimrc"
 
