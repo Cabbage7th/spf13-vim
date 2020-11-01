@@ -32,8 +32,8 @@
 
 " Environment {
     " kuroi, gruvbox, solarized, sonokai, dracula, default
-    let g:colorscheme="solarized"
-    let g:background="light"
+    let g:colorscheme="sonokai"
+    let g:background="dark"
     " ctags, gtags
     let g:tag_cscope="ctags"
 
@@ -751,6 +751,7 @@
 
             set statusline+=%{NearestMethodOrFunction()}
 
+            nnoremap <leader>tt :Vista!!<CR>
             " By default vista.vim never run if you don't call it
             " explicitly.
             "
