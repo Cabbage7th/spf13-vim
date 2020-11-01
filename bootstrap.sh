@@ -124,7 +124,7 @@ create_symlinks() {
     lnif "$source_path/.vimrc"         "$target_path/.vimrc"
     lnif "$source_path/.vimrc.plugs" "$target_path/.vimrc.plugs"
     lnif "$source_path/.vimrc.local"  "$target_path/.vimrc.local"
-    lnif "$source_path/coc-settings.json"           "$target_path/coc-settings.json"
+    lnif "$source_path/coc-settings.json"           "$target_path/.vim/coc-settings.json"
 
     ret="$?"
     success "Setting up vim symlinks."
