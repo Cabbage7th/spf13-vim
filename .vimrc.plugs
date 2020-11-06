@@ -22,7 +22,7 @@ call plug#begin('~/.vim/plugged')
     if !exists("g:override_spf13_plugs")
 
     " General {
-"        Plug 'scrooloose/nerdtree'
+        Plug 'scrooloose/nerdtree'
         " new nerdtree
         " give  defx nice icons
         "Plug 'kristijanhusak/defx-icons'
@@ -31,7 +31,7 @@ call plug#begin('~/.vim/plugged')
         "Plug 'roxma/nvim-yarp'
         "Plug 'roxma/vim-hug-neovim-rpc'
 
-        "Plug 'jistr/vim-nerdtree-tabs'
+        Plug 'jistr/vim-nerdtree-tabs'
         Plug 'justinmk/vim-dirvish'
         Plug 'tpope/vim-surround'
         Plug 'tpope/vim-repeat'
@@ -58,7 +58,7 @@ call plug#begin('~/.vim/plugged')
         " a start page
         Plug 'mhinz/vim-startify'
         " auto switch root dictory
-        Plug 'airblade/vim-rooter'
+"        Plug 'airblade/vim-rooter'
     " }
 
     " General Programming {
@@ -119,7 +119,6 @@ call plug#begin('~/.vim/plugged')
     " }
     " colors & themes {
         Plug 'altercation/vim-colors-solarized'
-        Plug 'aonemd/kuroi.vim'
         Plug 'morhetz/gruvbox'
         Plug 'franbach/miramare'
         Plug 'sainnhe/sonokai'

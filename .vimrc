@@ -32,7 +32,7 @@
 
 " Environment {
     " kuroi, gruvbox, solarized, sonokai, dracula, default
-    let g:colorscheme="sonokai"
+    let g:colorscheme="dracula"
     let g:background="dark"
     " ctags, gtags
     let g:tag_cscope="ctags"
@@ -90,7 +90,7 @@
     " Most prefer to automatically switch to the current file directory when
     " a new buffer is opened; to prevent this behavior, add the following to
     " your .vimrc.before.local file:
-    let g:spf13_no_autochdir = 1
+"    let g:spf13_no_autochdir = 1
     if !exists('g:spf13_no_autochdir')
         autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
         " Always switch to the current file directory
@@ -694,15 +694,30 @@
             set nobackup
             set nowritebackup
             set cmdheight=2
-            set updatetime=300
+"            set updatetime=1000
             set shortmess+=c
             " coc-explorer key mappings
             nnoremap <C-e> :CocCommand explorer<CR>
 
-            inoremap <silent><expr> <TAB>
-                  \ pumvisible() ? "\<C-n>" :"\<TAB>"
-            inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+            " 使用 <tab> 触发补全: >
 
+                function! s:check_back_space() abort
+                  let col = col('.') - 1
+                  return !col || getline('.')[col - 1]  =~ '\s'
+                endfunction
+
+                inoremap <silent><expr> <TAB>
+                      \ pumvisible() ? "\<C-n>" :
+                      \ <SID>check_back_space() ? "\<TAB>" :
+                      \ coc#refresh()
+            " 使用 <c-space> 强制触发补全: >
+
+            inoremap <silent><expr> <M-space> coc#refresh()
+            " 使用 `<cr>` 确认补全： >
+"                inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+            " 使用 <CR> 确认补全，并触发 coc.nvim 的 `formatOnType` 功能: >
+            inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                        \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
             " Use `[g` and `]g` to navigate diagnostics
             " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
             nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -724,7 +739,6 @@
             " xmap <leader>f  <Plug>(coc-format-selected)
             " nmap <leader>f  <Plug>(coc-format-selected)
 
-            inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>" 
             " Remap <C-f> and <C-b> for scroll float windows/popups.
             " Note coc#float#scroll works on neovim >= 0.4.3 or vim >= 8.2.0750
             nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"

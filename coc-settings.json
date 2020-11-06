@@ -24,10 +24,19 @@
             "filetypes": ["vim", "eruby", "markdown"]
         }
     },
+
     // coc-explorer
     "explorer.width": 30,
     "explorer.icon.enableNerdfont": true,
-    "explorer.file.showHiddenFiles": false,
+    "explorer.file.showHiddenFiles": true,
+    "explorer.file.child.template":"[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1][modified][readonly] [linkIcon & 1]",
+    "explorer.autoExpandOptions": [
+        "compact",
+        "uncompact"
+    ],
+    "explorer.file.autoReveal": true,
+    "explorer.autoExpandMaxDepth": 3,
+
     "explorer.file.hiddenRules": {
         "extensions": [
             "o",
@@ -40,7 +49,10 @@
             "^\\."
         ]
     },
+    // snippets
     "snippets.userSnippetsDirectory": "~/.config/coc/ultisnips/",
     "suggest.minTriggerInputLength": 2,
-    "suggest.enablePreview": true
+    "suggest.enablePreview": true,
+    // diagnostic
+    "diagnostic.messageTarget": "echo"
 }

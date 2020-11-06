@@ -174,6 +174,7 @@ program_must_exist "git"
 program_must_exist "node"
 program_must_exist "npm"
 program_must_exist "yarn"
+program_must_exist "clangd"
 
 do_backup       "$HOME/.vim" \
                 "$HOME/.vimrc" \
