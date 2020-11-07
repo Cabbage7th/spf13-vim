@@ -31,7 +31,7 @@
 " }
 
 " Environment {
-    " kuroi, gruvbox, solarized, sonokai, dracula, default
+    " gruvbox, solarized, sonokai, dracula, default
     let g:colorscheme="dracula"
     let g:background="dark"
     " ctags, gtags
@@ -52,8 +52,6 @@
 " }
 
 " General {
-
-"    set background=dark         " Assume a dark background
 
     " Allow to trigger background
     function! ToggleBG()
@@ -165,12 +163,6 @@
         endif
     endfunction
 
-    if g:background ==? "light"
-        set background=light
-    else
-        set background=dark
-    endif
-
     if g:colorscheme ==? "kuroi"
         if filereadable(expand("~/.vim/plugged/kuroi.vim/colors/kuroi.vim"))
             color kuroi
@@ -204,6 +196,13 @@
         colorscheme sonokai
     else
         call SetDefaultColorscheme()
+    endif
+
+    if g:background ==? "light"
+        set background=light
+    else
+        set background=dark
+        highlight Pmenu ctermbg=darkgray ctermfg=white gui=bold
     endif
 
     set tabpagemax=15               " Only show 15 tabs
