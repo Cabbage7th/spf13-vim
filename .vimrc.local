@@ -11,5 +11,8 @@
     nnoremap    sa      :wa<CR>
     nnoremap    gb      <C-^>
     nnoremap    sp      :pwd<CR>
+    nnoremap    sq      :wq<CR>
+    nnoremap    qq      :q!<CR>
+    nnoremap    qqa     :qa!<CR>
 "
 " }
