@@ -888,6 +888,19 @@
         endif
     " }
 
+    " Minimap{
+        if isdirectory(expand("~/.vim/plugged/minimap.vim/"))
+            nnoremap <Leader>mm :MinimapToggle<CR>
+            let g:minimap_width = 10
+            let g:minimap_auto_start = 0
+            let g:minimap_block_filetypes = [
+                        \'fugitiv',
+                        \'nerdtree',
+                        \'tagbar'
+                        \]
+        endif
+    " }
+
     " indent_guides {
         if isdirectory(expand("~/.vim/plugged/vim-indent-guides/"))
             let g:indent_guides_start_level = 2

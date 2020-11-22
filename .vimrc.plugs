@@ -22,7 +22,6 @@ call plug#begin('~/.vim/plugged')
     if !exists("g:override_spf13_plugs")
 
     " General {
-        Plug 'scrooloose/nerdtree'
         " new nerdtree
         " give  defx nice icons
         "Plug 'kristijanhusak/defx-icons'
@@ -31,7 +30,6 @@ call plug#begin('~/.vim/plugged')
         "Plug 'roxma/nvim-yarp'
         "Plug 'roxma/vim-hug-neovim-rpc'
 
-        Plug 'jistr/vim-nerdtree-tabs'
         Plug 'justinmk/vim-dirvish'
         Plug 'tpope/vim-surround'
         Plug 'tpope/vim-repeat'
@@ -116,6 +114,7 @@ call plug#begin('~/.vim/plugged')
         Plug 'quentindecock/vim-cucumber-align-pipes'
         Plug 'saltstack/salt-vim'
         Plug 'sheerun/vim-polyglot'
+        Plug 'wfxr/minimap.vim'
     " }
     " colors & themes {
         Plug 'altercation/vim-colors-solarized'
