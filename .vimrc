@@ -929,7 +929,8 @@
         if isdirectory(expand("~/.vim/plugged/vim-airline-themes/"))
             set t_Co=256
             set laststatus=2
-            let g:airline_theme='random'
+            "let g:airline_theme='random'
+            let g:airline_theme= g:colorscheme
             let g:airline_powerline_fonts = 1                   " support powerline fonts(works in gvim)
 
             " show status of tabs and buffers
