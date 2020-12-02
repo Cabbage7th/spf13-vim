@@ -32,7 +32,7 @@
 
 " Environment {
     " gruvbox, solarized, sonokai, dracula, default
-    let g:colorscheme="dracula"
+    let g:colorscheme="edge"
     let g:background="dark"
     " ctags, gtags
     let g:tag_cscope="ctags"

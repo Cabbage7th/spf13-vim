@@ -123,6 +123,12 @@ call plug#begin('~/.vim/plugged')
         Plug 'sainnhe/sonokai'
         Plug 'ap/vim-css-color'
         Plug 'dracula/vim', { 'as': 'dracula' }
+        Plug 'drewtempelmeyer/palenight.vim'
+        Plug 'joshdick/onedark.vim'
+        Plug 'ghifarit53/tokyonight-vim'
+        Plug 'sainnhe/sonokai'
+        Plug 'sainnhe/edge'
+        Plug 'rakr/vim-one'
     " }
     " others {
         Plug 'vim/killersheep'
